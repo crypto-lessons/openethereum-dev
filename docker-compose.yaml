@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  openethereum_dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: openethereum_dev
+    hostname: openethereum_dev
+    ports:
+      - ${JSONRPC_PORT}:8545
+      - ${NETWORK_PORT}:8546
+      - ${WS_PORT}:30303
+  openethereum_dev_explorer:
+    image: alethio/ethereum-lite-explorer
+    container_name: openethereum_dev_explorer
+    environment:
+      - APP_NODE_URL=http://localhost:8545
+    ports:
+      - ${EXPLORER_PORT}:80
+
+
